@@ -63,7 +63,7 @@ struct ChildView: View {
             .background(Color.blue.opacity(0.2))
             .clipShape(RoundedRectangle(cornerRadius: 10))
             
-            Text(store.state.response.value ?? "")
+            Text(store.state.response.value?.message ?? "")
                 .font(.headline)
                 .foregroundColor(Color.blue)
                 .padding(.top, 20.0)

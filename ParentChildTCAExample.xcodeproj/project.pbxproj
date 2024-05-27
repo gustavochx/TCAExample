@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		155384622C0511DD003FBFE7 /* MockBinDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155384612C0511DD003FBFE7 /* MockBinDataFetcher.swift */; };
+		155384642C0514BA003FBFE7 /* FetchingEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155384632C0514BA003FBFE7 /* FetchingEvent.swift */; };
+		155384662C051545003FBFE7 /* MockBinDataFetcher+DependencyInjection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155384652C051545003FBFE7 /* MockBinDataFetcher+DependencyInjection.swift */; };
 		1563DBE32BEEBFE100E14DFB /* ParentChildTCAExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1563DBE22BEEBFE100E14DFB /* ParentChildTCAExampleApp.swift */; };
 		1563DBE52BEEBFE100E14DFB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1563DBE42BEEBFE100E14DFB /* ContentView.swift */; };
 		1563DBE72BEEBFE300E14DFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1563DBE62BEEBFE300E14DFB /* Assets.xcassets */; };
@@ -19,6 +22,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		155384612C0511DD003FBFE7 /* MockBinDataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockBinDataFetcher.swift; sourceTree = "<group>"; };
+		155384632C0514BA003FBFE7 /* FetchingEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchingEvent.swift; sourceTree = "<group>"; };
+		155384652C051545003FBFE7 /* MockBinDataFetcher+DependencyInjection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MockBinDataFetcher+DependencyInjection.swift"; sourceTree = "<group>"; };
 		1563DBDF2BEEBFE100E14DFB /* ParentChildTCAExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ParentChildTCAExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1563DBE22BEEBFE100E14DFB /* ParentChildTCAExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentChildTCAExampleApp.swift; sourceTree = "<group>"; };
 		1563DBE42BEEBFE100E14DFB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -42,6 +48,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		155384602C051187003FBFE7 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				155384672C05154B003FBFE7 /* MockBinDataFetcher */,
+				155384632C0514BA003FBFE7 /* FetchingEvent.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		155384672C05154B003FBFE7 /* MockBinDataFetcher */ = {
+			isa = PBXGroup;
+			children = (
+				155384612C0511DD003FBFE7 /* MockBinDataFetcher.swift */,
+				155384652C051545003FBFE7 /* MockBinDataFetcher+DependencyInjection.swift */,
+			);
+			path = MockBinDataFetcher;
+			sourceTree = "<group>";
+		};
 		1563DBD62BEEBFE100E14DFB = {
 			isa = PBXGroup;
 			children = (
@@ -61,6 +85,7 @@
 		1563DBE12BEEBFE100E14DFB /* ParentChildTCAExample */ = {
 			isa = PBXGroup;
 			children = (
+				155384602C051187003FBFE7 /* Common */,
 				1563DBF32BEEC95300E14DFB /* Features */,
 				1563DBE22BEEBFE100E14DFB /* ParentChildTCAExampleApp.swift */,
 				1563DBE42BEEBFE100E14DFB /* ContentView.swift */,
@@ -181,8 +206,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				155384642C0514BA003FBFE7 /* FetchingEvent.swift in Sources */,
 				1563DBE52BEEBFE100E14DFB /* ContentView.swift in Sources */,
+				155384662C051545003FBFE7 /* MockBinDataFetcher+DependencyInjection.swift in Sources */,
 				1563DBFB2BEECC2E00E14DFB /* ChildView.swift in Sources */,
+				155384622C0511DD003FBFE7 /* MockBinDataFetcher.swift in Sources */,
 				1563DBF52BEEC97700E14DFB /* ChildFeatureReducer.swift in Sources */,
 				1563DBFE2BEECD4700E14DFB /* ParentFeatureReducer.swift in Sources */,
 				1563DC002BEECD6100E14DFB /* ParentView.swift in Sources */,

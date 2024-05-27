@@ -14,47 +14,20 @@ import ComposableArchitecture
 ///         Always think about the scope of the states that will be created between the reduces
 @Reducer
 struct ChildFeatureReducer {
+    @Dependency(\.mockBinDataFetcher) var dataFetcher
+    
     @ObservableState
     struct State: Equatable {
         var count: Int = 0
-        var response: Event<String, Never> = .none
+        var response: FetchingEvent<MockBinResponse, Never> = .none
     }
-    
-    enum Event<Success: Equatable, Error: Equatable>: Equatable {
-        case none
-        case success(Success)
-        case error(Error)
-        case loading
-        
-        var isLoading: Bool {
-            self == .loading
-        }
-        
-        var value: Success? {
-            switch self {
-            case let .success(success):
-                return success
-            default:
-                return nil
-            }
-        }
-    }
-    
-    var dependency: SenpaiClient = .init()
     
     enum Action: Equatable {
         case decrementButtonTapped
         case incrementButtonTapped
         case resetTapped
         case sendRequestButtonTapped
-        case responseReceived(String)
-    }
-    
-    struct SenpaiClient {
-        func callRequest() async -> String {
-            try? await Task.sleep(nanoseconds: 2_000_000_000)
-            return UUID().uuidString
-        }
+        case responseReceived(MockBinResponse?)
     }
     
     func reduce(into state: inout State, action: Action) -> Effect<Action> {
@@ -71,11 +44,14 @@ struct ChildFeatureReducer {
         case .sendRequestButtonTapped:
             state.response = .loading
             return .run { send in
-                let returnedResponse = await dependency.callRequest()
+                let returnedResponse = try? await dataFetcher.fetchData()
                 await send(.responseReceived(returnedResponse))
             }
         case let .responseReceived(response):
-            state.response = .success(response)
+            // TODO: Discuss with Bocato if is this the right approach to handle with error
+            guard let returnedResponse = response else { return .none }
+            
+            state.response = .success(returnedResponse)
             return .none
         }
     }
