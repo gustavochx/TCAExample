@@ -19,7 +19,7 @@ struct ChildFeatureReducer {
     @ObservableState
     struct State: Equatable {
         var count: Int = 0
-        var response: FetchingEvent<MockBinResponse, Never> = .none
+        var response: FetchingEvent<MockBinResponse, Never>?
     }
     
     enum Action: Equatable {
@@ -27,7 +27,7 @@ struct ChildFeatureReducer {
         case incrementButtonTapped
         case resetTapped
         case sendRequestButtonTapped
-        case responseReceived(MockBinResponse?)
+        case requestResult(TaskResult<MockBinResponse>)
     }
     
     func reduce(into state: inout State, action: Action) -> Effect<Action> {
@@ -43,17 +43,22 @@ struct ChildFeatureReducer {
             return .none
         case .sendRequestButtonTapped:
             state.response = .loading
+            // TODO: Create a complex asynchronous function call using do catch instead of TaskResult
             return .run { send in
-                let returnedResponse = try? await dataFetcher.fetchData()
-                await send(.responseReceived(returnedResponse))
+                await send(
+                    .requestResult(
+                        TaskResult {
+                            try await dataFetcher.fetchData()
+                        }
+                    )
+                )
             }
-        case let .responseReceived(response):
-            // TODO: Discuss with Bocato if is this the right approach to handle with error
-            guard let returnedResponse = response else { return .none }
-            
-            state.response = .success(returnedResponse)
+        case let .requestResult(.success(response)):
+            state.response = .success(response)
+            return .none
+        // TODO: Create error component
+        case let .requestResult(.failure(error)):
             return .none
         }
     }
 }
-

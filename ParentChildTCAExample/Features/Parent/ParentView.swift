@@ -9,7 +9,7 @@ import SwiftUI
 import ComposableArchitecture
 
 struct ParentView: View {
-    let store: StoreOf<ParentFeatureReducer>
+    @Bindable var store: StoreOf<ParentFeatureReducer>
     
     var body: some View {
         VStack {
@@ -19,6 +19,13 @@ struct ParentView: View {
                     action: \.childAction
                 )
             )
+            
+            Button(action: {
+                store.send(.showAlert)
+            }, label: {
+                Text("Present alert")
+            })
         }
+        .alert($store.scope(state: \.alert, action: \.alert))
     }
 }
